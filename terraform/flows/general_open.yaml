@@ -1,0 +1,45 @@
+inboundCall:
+  name: "{{flow_name}}"
+  description: General visa and citizenship information line, business hours. Identity is checked by a person, never by the menu.
+  division: "{{division_name}}"
+  defaultLanguage: en-au
+  startUpRef: ./menus/menu[mainMenu]
+  initialGreeting:
+    tts: Thank you for calling the visa and citizenship information line. This call may be recorded for quality and training. Please do not say or key in any personal details until you are asked.
+  menus:
+    - menu:
+        name: General Menu
+        audio:
+          tts: For visa enquiries, press 1. For citizenship enquiries, press 2. If your matter is urgent or compassionate, press 3. For help in another language, press 4. To make a complaint or give feedback, press 5.
+        refId: mainMenu
+        choices:
+          - menuTransferToAcd:
+              name: Visa enquiries
+              dtmf: digit_1
+              targetQueue:
+                lit:
+                  name: "{{queue_visa_enquiries}}"
+          - menuTransferToAcd:
+              name: Citizenship enquiries
+              dtmf: digit_2
+              targetQueue:
+                lit:
+                  name: "{{queue_citizenship_enquiries}}"
+          - menuTransferToAcd:
+              name: Urgent or compassionate
+              dtmf: digit_3
+              targetQueue:
+                lit:
+                  name: "{{queue_priority_and_compassionate}}"
+          - menuTransferToAcd:
+              name: Language help
+              dtmf: digit_4
+              targetQueue:
+                lit:
+                  name: "{{queue_interpreter_assisted}}"
+          - menuTransferToAcd:
+              name: Complaints and feedback
+              dtmf: digit_5
+              targetQueue:
+                lit:
+                  name: "{{queue_complaints_and_feedback}}"

@@ -1,0 +1,18 @@
+inboundCall:
+  name: "{{flow_name}}"
+  description: General line, outside business hours. Message only. No personal details are collected.
+  division: "{{division_name}}"
+  defaultLanguage: en-au
+  startUpRef: ./menus/menu[mainMenu]
+  initialGreeting:
+    tts: Thank you for calling the visa and citizenship information line. Our office is closed.
+  menus:
+    - menu:
+        name: Closed Message
+        audio:
+          tts: We are open Monday to Friday, 9am to 5pm, Melbourne time. You can find information and forms on our website. If anyone is in danger, call triple zero. Press 9 to end this call.
+        refId: mainMenu
+        choices:
+          - menuDisconnect:
+              name: Disconnect
+              dtmf: digit_9

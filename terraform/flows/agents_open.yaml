@@ -1,0 +1,33 @@
+inboundCall:
+  name: "{{flow_name}}"
+  description: Registered agents and sponsors line, business hours. Third-party authority is checked by a person.
+  division: "{{division_name}}"
+  defaultLanguage: en-au
+  startUpRef: ./menus/menu[mainMenu]
+  initialGreeting:
+    tts: Thank you for calling the registered agents and sponsors line. This call may be recorded for quality and training. Have your authority form ready. Do not say or key in the client's personal details until you are asked.
+  menus:
+    - menu:
+        name: Agents Menu
+        audio:
+          tts: To speak with the agents and sponsors team, press 1. For help in another language, press 2. To make a complaint or give feedback, press 3.
+        refId: mainMenu
+        choices:
+          - menuTransferToAcd:
+              name: Agents and sponsors
+              dtmf: digit_1
+              targetQueue:
+                lit:
+                  name: "{{queue_agents_and_sponsors}}"
+          - menuTransferToAcd:
+              name: Language help
+              dtmf: digit_2
+              targetQueue:
+                lit:
+                  name: "{{queue_interpreter_assisted}}"
+          - menuTransferToAcd:
+              name: Complaints and feedback
+              dtmf: digit_3
+              targetQueue:
+                lit:
+                  name: "{{queue_complaints_and_feedback}}"

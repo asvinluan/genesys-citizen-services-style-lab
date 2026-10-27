@@ -1,0 +1,18 @@
+inboundCall:
+  name: "{{flow_name}}"
+  description: General line, public holiday. Message only.
+  division: "{{division_name}}"
+  defaultLanguage: en-au
+  startUpRef: ./menus/menu[mainMenu]
+  initialGreeting:
+    tts: Thank you for calling the visa and citizenship information line. Our office is closed today for a public holiday.
+  menus:
+    - menu:
+        name: Holiday Message
+        audio:
+          tts: We will reopen on the next business day. You can find information and forms on our website. If anyone is in danger, call triple zero. Press 9 to end this call.
+        refId: mainMenu
+        choices:
+          - menuDisconnect:
+              name: Disconnect
+              dtmf: digit_9

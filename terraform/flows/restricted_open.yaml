@@ -1,0 +1,24 @@
+inboundCall:
+  name: "{{flow_name}}"
+  description: RESTRICTED line, 24 hours. Goes only to the restricted queue. The surge switch never overrides it.
+  division: "{{division_name}}"
+  defaultLanguage: en-au
+  startUpRef: ./menus/menu[mainMenu]
+  initialGreeting:
+    tts: This is a restricted line for authorised use only. Do not say or key in any details until you are connected to an authorised officer.
+  menus:
+    - menu:
+        name: Restricted Menu
+        audio:
+          tts: To continue, press 1. To end this call, press 9.
+        refId: mainMenu
+        choices:
+          - menuTransferToAcd:
+              name: Restricted reports
+              dtmf: digit_1
+              targetQueue:
+                lit:
+                  name: "{{queue_restricted_reports}}"
+          - menuDisconnect:
+              name: Disconnect
+              dtmf: digit_9

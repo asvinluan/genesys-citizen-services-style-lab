@@ -1,0 +1,33 @@
+inboundCall:
+  name: "{{flow_name}}"
+  description: Major event flow. Used by the surge switch and the surge information line. Honest wait message and a safe way to the right queue.
+  division: "{{division_name}}"
+  defaultLanguage: en-au
+  startUpRef: ./menus/menu[mainMenu]
+  initialGreeting:
+    tts: We are responding to a major event and wait times are longer than usual. If anyone is in danger, call triple zero.
+  menus:
+    - menu:
+        name: Surge Menu
+        audio:
+          tts: If your matter is urgent or compassionate, press 1. For help in another language, press 2. For anything else, press 3 and stay on the line, or visit our website.
+        refId: mainMenu
+        choices:
+          - menuTransferToAcd:
+              name: Urgent or compassionate
+              dtmf: digit_1
+              targetQueue:
+                lit:
+                  name: "{{queue_priority_and_compassionate}}"
+          - menuTransferToAcd:
+              name: Language help
+              dtmf: digit_2
+              targetQueue:
+                lit:
+                  name: "{{queue_interpreter_assisted}}"
+          - menuTransferToAcd:
+              name: Event response
+              dtmf: digit_3
+              targetQueue:
+                lit:
+                  name: "{{queue_surge_response}}"
